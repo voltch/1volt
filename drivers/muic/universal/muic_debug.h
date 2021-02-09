@@ -1,9 +1,6 @@
 #ifndef _MUIC_DEBUG_
 #define _MUIC_DEBUG_
 
-#ifndef CONFIG_MUIC_A8 /* disable DEBUG log */
-#define DEBUG_MUIC
-#endif
 
 extern void muic_reg_log(u8 reg, u8 value, u8 rw);
 extern void muic_print_reg_log(void);

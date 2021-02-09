@@ -39,6 +39,6 @@ obj-y += gpu_utilization.o
 obj-y += gpu_dvfs_handler.o
 obj-y += gpu_dvfs_api.o
 obj-y += gpu_dvfs_governor.o
-obj-y += gpu_job_fence_debug.o
+#obj-y += gpu_job_fence_debug.o
 obj-$(CONFIG_MALI_DEBUG_SYS) += gpu_custom_interface.o
 obj-$(CONFIG_CPU_THERMAL_IPA) += gpu_ipa.o

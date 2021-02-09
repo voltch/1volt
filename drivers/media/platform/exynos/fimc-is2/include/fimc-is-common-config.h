@@ -44,9 +44,9 @@
 /* #define ENABLE_MIF_400 */
 #define ENABLE_DTP
 #define ENABLE_FLITE_OVERFLOW_STOP
-#define ENABLE_DBG_FS
+//#define ENABLE_DBG_FS
 /* #define ENABLE_DBG_EVENT */
-#define ENABLE_DBG_STATE
+//#define ENABLE_DBG_STATE
 #define FIXED_SENSOR_DEBUG
 #define ENABLE_RESERVED_MEM
 
@@ -101,7 +101,7 @@
  * =================================================================================================
  */
 
-#define DEBUG_LOG_MEMORY
+//#define DEBUG_LOG_MEMORY
 /* #define DEBUG */
 /* #define DBG_PSV */
 #define DBG_VIDEO
@@ -112,11 +112,11 @@
 /* #define DEBUG_HW_SIZE */
 #define DBG_STREAM_ID 0x3F
 /* #define DBG_JITTER */
-#define FW_PANIC_ENABLE
+//#define FW_PANIC_ENABLE
 /* #define SENSOR_PANIC_ENABLE */
 #define OVERFLOW_PANIC_ENABLE_ISCHAIN
 #define OVERFLOW_PANIC_ENABLE_CSIS
-#define ENABLE_KERNEL_LOG_DUMP
+//#define ENABLE_KERNEL_LOG_DUMP
 /* #define FIXED_FPS_DEBUG */
 
 /* 5fps */
@@ -130,12 +130,7 @@
 /* #define DBG_DRAW_DIGIT */
 /* #define DBG_IMAGE_DUMP */
 /* #define DBG_META_DUMP */
-#define DBG_HAL_DEAD_PANIC_DELAY (500) /* ms */
-#define DBG_DMA_DUMP_PATH	"/data"
-#define DBG_DMA_DUMP_INTEVAL	33	/* unit : frame */
-#define DBG_DMA_DUMP_VID_COND(vid)	((vid == FIMC_IS_VIDEO_SS0_NUM) || \
-					(vid == FIMC_IS_VIDEO_SS1_NUM) || \
-					(vid == FIMC_IS_VIDEO_M0P_NUM))
+
 /* #define DEBUG_HW_SFR */
 /* #define DBG_DUMPREG */
 /* #define USE_ADVANCED_DZOOM */

@@ -1402,20 +1402,20 @@ static int fimc_is_probe(struct platform_device *pdev)
 
 	/* set sysfs for debuging */
 	sysfs_debug.en_clk_gate = 0;
-	sysfs_debug.en_dvfs = 1;
+	sysfs_debug.en_dvfs = 0;
 	sysfs_debug.hal_debug_mode = 0;
-	sysfs_debug.hal_debug_delay = DBG_HAL_DEAD_PANIC_DELAY;
+	sysfs_debug.hal_debug_delay = 0;
 #ifdef ENABLE_CLOCK_GATE
-	sysfs_debug.en_clk_gate = 1;
+	sysfs_debug.en_clk_gate = 0;
 #ifdef HAS_FW_CLOCK_GATE
-	sysfs_debug.clk_gate_mode = CLOCK_GATE_MODE_FW;
+	sysfs_debug.clk_gate_mode = 0;
 #else
-	sysfs_debug.clk_gate_mode = CLOCK_GATE_MODE_HOST;
+	sysfs_debug.clk_gate_mode = 0;
 #endif
 #endif
 
 #ifdef ENABLE_DIRECT_CLOCK_GATE
-	sysfs_debug.en_clk_gate = 1;
+	sysfs_debug.en_clk_gate = 0;
 #endif
 	ret = sysfs_create_group(&core->pdev->dev.kobj, &fimc_is_debug_attr_group);
 
