@@ -21,7 +21,7 @@
 
 void (*cal_data_init)(void) = NULL;
 
-#if defined(CONFIG_SEC_FACTORY) || defined(CONFIG_SEC_DEBUG)
+#if 1
 enum ids_info {
 	tg,
 	lg,
@@ -65,7 +65,7 @@ int asv_ids_information(enum ids_info id) {
 }
 #endif
 
-#if defined(CONFIG_SEC_PM_DEBUG)
+#if 1
 enum dvfs_id {
 	cal_asv_dvfs_big,
 	cal_asv_dvfs_little,

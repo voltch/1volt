@@ -3216,7 +3216,7 @@ out:
 		SEC_ufs_operation_check(hba, cmd->command);
 #endif
 		ufshcd_vops_dbg_register_dump(hba);
-		exynos_ufs_show_uic_info(hba);
+
 	}
 
 	spin_lock_irqsave(hba->host->host_lock, flags);
@@ -4716,7 +4716,6 @@ static void ufshcd_err_handler(struct work_struct *work)
 
 	hba->ufshcd_state = UFSHCD_STATE_RESET;
 	ufshcd_set_eh_in_progress(hba);
-	exynos_ufs_show_uic_info(hba);
 
 	/* Complete requests that have door-bell cleared by h/w */
 	ufshcd_transfer_req_compl(hba);
@@ -5059,7 +5058,6 @@ static int ufshcd_eh_device_reset_handler(struct scsi_cmnd *cmd)
 
 	/* Dump debugging information to system memory */
 	ufshcd_vops_dbg_register_dump(hba);
-	exynos_ufs_show_uic_info(hba);
 
 
 	lrbp = &hba->lrb[tag];
