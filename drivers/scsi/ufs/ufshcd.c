@@ -5745,7 +5745,6 @@ out:
 	} else if (ret && re_cnt >= UFS_LINK_SETUP_RETRIES) {
 		dev_err(hba->dev, "%s failed after retries with err %d\n",
 			__func__, ret);
-		exynos_ufs_dump_uic_info(hba);
 		hba->rst_info.rst_type = UFS_RESET_PROBE;
 		hba->rst_info.rst_cnt_probe++;
 		spin_lock_irqsave(hba->host->host_lock, flags);

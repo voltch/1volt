@@ -1759,31 +1759,6 @@ static int max98506_probe(struct snd_soc_codec *codec)
 			MAX98506_DAI_INTERLEAVE_MASK,
 			MAX98506_DAI_INTERLEAVE_MASK);
 
-#if defined(USE_DSM_LOG) || defined(USE_DSM_UPDATE_CAL)
-	if (!g_class)
-		g_class = class_create(THIS_MODULE, class_name_log);
-	max98506->dev_log_class = g_class;
-	if (max98506->dev_log_class) {
-		max98506->dev_log =
-			device_create(max98506->dev_log_class,
-					NULL, 1, NULL, "max98506");
-		if (IS_ERR(max98506->dev_log)) {
-			ret = sysfs_create_group(&codec->dev->kobj,
-				&max98506_attribute_group);
-			if (ret)
-				msg_maxim(
-				"failed to create sysfs group [%d]", ret);
-		} else {
-			ret = sysfs_create_group(&max98506->dev_log->kobj,
-				&max98506_attribute_group);
-			if (ret)
-				msg_maxim(
-				"failed to create sysfs group [%d]", ret);
-		}
-	}
-	msg_maxim("g_class=%p %p", g_class, max98506->dev_log_class);
-#endif /* USE_DSM_LOG */
-
 err_version:
 	msg_maxim("exit %d", ret);
 

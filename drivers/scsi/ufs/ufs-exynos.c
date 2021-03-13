@@ -891,7 +891,6 @@ static bool exynos_ufs_wait_pll_lock(struct exynos_ufs *ufs, u32 addr, u32 mask)
 
 	dev_err(ufs->dev, "timeout pll lock\n");
 
-	exynos_ufs_dump_uic_info(ufs->hba);
 
 	return false;
 
@@ -912,7 +911,6 @@ static bool exynos_ufs_wait_cdr_lock(struct exynos_ufs *ufs, u32 addr,
 
 	dev_err(ufs->dev, "timeout cdr lock\n");
 
-	exynos_ufs_dump_uic_info(ufs->hba);
 
 	return false;
 
