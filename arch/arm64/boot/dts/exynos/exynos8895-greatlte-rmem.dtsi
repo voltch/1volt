@@ -23,6 +23,13 @@
 			reg = <0x8 0x80000000 0x15E00000>;
 			id = <10>;
 		};
+		
+		secure_camera {
+			compatible = "exynos8890-ion,secure_camera";
+			ion,secure;
+			reg = <0x0 0xD0000000 0x1400000>;
+			id = <11>;
+		};
 
 		/* NOTE: reusable region should be aligned by 4MiB */
 		video_stream {

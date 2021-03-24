@@ -1968,7 +1968,7 @@ arch_get_unmapped_area(struct file *filp, unsigned long addr,
 
 	if (len > TASK_SIZE - mmap_min_addr) {
 		if (__ratelimit(&mmap_rs)) {
-			printk(KERN_ERR "%s %d - (len > TASK_SIZE - mmap_min_addr) len=0x%lx "
+			pr_debug(KERN_ERR "%s %d - (len > TASK_SIZE - mmap_min_addr) len=0x%lx "
 				"TASK_SIZE=0x%lx mmap_min_addr=0x%lx pid=%d total_vm=0x%lx addr=0x%lx\n",
 				__func__, __LINE__,
 				len, TASK_SIZE, mmap_min_addr, current->pid,
@@ -1997,7 +1997,7 @@ arch_get_unmapped_area(struct file *filp, unsigned long addr,
 	addr = vm_unmapped_area(&info);
 	if (addr == -ENOMEM) {
 		if (__ratelimit(&mmap_rs)) {
-			printk(KERN_ERR "%s %d - NOMEM from vm_unmapped_area "
+			pr_debug(KERN_ERR "%s %d - NOMEM from vm_unmapped_area "
 				"pid=%d total_vm=0x%lx flags=0x%lx length=0x%lx low_limit=0x%lx "
 				"high_limit=0x%lx align_mask=0x%lx\n",
 				__func__, __LINE__,
@@ -2030,7 +2030,7 @@ arch_get_unmapped_area_topdown(struct file *filp, const unsigned long addr0,
 	/* requested length too big for entire address space */
 	if (len > TASK_SIZE - mmap_min_addr) {
 		if (__ratelimit(&mmap_rs)) {
-			printk(KERN_ERR "%s %d - (len > TASK_SIZE - mmap_min_addr) len=%lx "
+			pr_debug(KERN_ERR "%s %d - (len > TASK_SIZE - mmap_min_addr) len=%lx "
 				"TASK_SIZE=0x%lx mmap_min_addr=0x%lx pid=%d total_vm=0x%lx addr=0x%lx\n",
 				__func__, __LINE__,
 				len, TASK_SIZE, mmap_min_addr, current->pid,
@@ -2074,7 +2074,7 @@ arch_get_unmapped_area_topdown(struct file *filp, const unsigned long addr0,
 	}
 	if (addr == -ENOMEM) {
 		if (__ratelimit(&mmap_rs)) {
-			printk(KERN_ERR "%s %d - NOMEM from vm_unmapped_area "
+			pr_debug(KERN_ERR "%s %d - NOMEM from vm_unmapped_area "
 				"pid=%d total_vm=0x%lx flags=0x%lx length=0x%lx low_limit=0x%lx "
 				"high_limit=0x%lx align_mask=0x%lx\n",
 				__func__, __LINE__,
