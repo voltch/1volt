@@ -348,7 +348,7 @@ static void abox_process_ipc(struct work_struct *work)
 		dev_dbg(dev, "%s(%d, %zu)\n", __func__, hw_irq, size);
 
 		*state = SEND_MSG;
-		memcpy(tx_sram_base, supplement, size);
+		memcpy_toio(tx_sram_base, supplement, size);
 		abox_gic_generate_interrupt(data->pdev_gic, hw_irq);
 		result = wait_event_timeout(data->ipc_wait_queue,
 				(*state == SEND_MSG_OK ||
