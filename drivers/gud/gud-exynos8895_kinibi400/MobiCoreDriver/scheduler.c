@@ -196,10 +196,6 @@ static int tee_scheduler(void *arg)
 			ret = mc_fc_nsiq();
 		}
 
-#ifdef CONFIG_TRUSTONIC_TEE_LOG
-		/* Always flush log buffer after the SWd has run */
-		mc_logging_run();
-#endif
 		if (ret)
 			break;
 

@@ -24,9 +24,6 @@ mcDrvModule-y := \
 	teeclientapi.o \
 	user.o
 
-ifeq ($(CONFIG_TRUSTONIC_TEE_LOG),y)
-mcDrvModule-y += logging.o
-endif
 
 # Release mode by default
 ccflags-y += -DNDEBUG
