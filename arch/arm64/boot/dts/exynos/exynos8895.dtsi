@@ -914,7 +914,7 @@
 		gpu_default_voltage = <800000>;
 		gpu_cold_minimum_vol = <0>;
 		gpu_voltage_offset_margin = <37500>;
-		gpu_tmu_control = <1>;
+		gpu_tmu_control = <0>;
 		gpu_temp_throttling_level_num = <6>;
 		gpu_temp_throttling = <546000 455000 385000 338000 260000 260000>;
 		gpu_power_coeff = <625>;
@@ -931,8 +931,8 @@
 		gpu_pmqos_mif_max_clock = <1794000>;
 		gpu_pmqos_mif_max_clock_base = <546000>;
 		gpu_cl_dvfs_start_base = <455000>;
-		gpu_debug_level = <3>; /*DEBUG(1) INFO(2) WARNING(3) ERROR(4)*/
-		gpu_trace_level = <8>; /*TRACE_ALL*/
+		gpu_debug_level = <4>; /*DEBUG(1) INFO(2) WARNING(3) ERROR(4)*/
+		gpu_trace_level = <1>; /*TRACE_ALL*/
 		gpu_mo_min_clock = <455000>;
 		gpu_boost_gpu_min_lock = <0>;
 		gpu_boost_egl_min_lock = <1872000>;
@@ -3651,11 +3651,6 @@
 			reg = <0x0 0x13F2E000 0x1000>;
 			reg-names = "reg";
 			abox = <&abox>;
-		};
-
-		abox_debug: abox_debug@0 {
-			compatible = "samsung,abox-debug";
-			memory-region = <&abox_rmem>;
 		};
 
 		abox_vss: abox_vss@0 {
