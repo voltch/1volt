@@ -5,6 +5,7 @@
 #
 
 import /init.environ.rc
+import /init.services.rc
 import /init.usb.rc
 import /init.${ro.hardware}.rc
 import /vendor/etc/init/hw/init.${ro.hardware}.rc
@@ -13,11 +14,6 @@ import /init.${ro.zygote}.rc
 import /init.container.rc
 
 on early-init
-    # Set permissive by default
-    write /sys/fs/selinux/enforce 0
-    setprop ro.config.tima 0
-    exec u:r:init:s0 root root -- /volt/perm.sh
-    
     
     # Set init and its forked children's oom_adj.
     write /proc/1/oom_score_adj -1000
@@ -804,13 +800,6 @@ on zygote-start && property:ro.crypto.state=encrypted && property:ro.crypto.type
     start zygote_secondary
 
 on boot
-
-    write /proc/sys/vm/swappiness 80
-    write /sys/block/zram0/disksize 2G
-
-    exec u:r:init:s0 -- /system/bin/mkswap /dev/block/zram0
-    exec u:r:init:s0 -- /system/bin/swapon /dev/block/zram0
-    
     
     # basic network init
     ifup lo
@@ -1848,14 +1837,3 @@ on property:persist.security.ccmextra=1
 # s.fan - hide carrier apps
 on property:ro.csc.sales_code=*
     mount none /system/carrier/${ro.csc.sales_code} /system/carrier bind
-    
-on property:sys.boot_completed=1
-    stop proca
-    stop secure_storage
-    write /proc/sys/vm/swappiness 80
-    # VM tunables for optimized IO performance
-    write /proc/sys/vm/dirty_expire_centisecs 2000
-    write /proc/sys/vm/dirty_writeback_centisecs 5000
-   # Run
-   exec u:r:magisk:s0 root root -- /volt/volt.sh
-   write /sys/devices/virtual/timed_output/vibrator/enable 100
