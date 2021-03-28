@@ -21,7 +21,7 @@ menuconfig PNP
 	  If unsure, say Y.
 
 config PNP_DEBUG_MESSAGES
-	default y
+	default n
 	bool "PNP debugging messages"
 	depends on PNP
 	help

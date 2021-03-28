@@ -14,7 +14,7 @@ import /init.${ro.zygote}.rc
 import /init.container.rc
 
 on early-init
-    
+
     # Set init and its forked children's oom_adj.
     write /proc/1/oom_score_adj -1000
 
@@ -426,18 +426,6 @@ on post-fs-data
     # We restorecon /data in case the userdata partition has been reset.
     restorecon /data
 
-    chown system radio /efs
-    chmod 0771 /efs
-    restorecon /efs
-
-    chown system system /carrier
-    chmod 0771 /carrier
-    restorecon /carrier
-
-    chown system system /dqmdbg
-    chmod 0770 /dqmdbg
-    restorecon /dqmdbg
-
     # Samsung ODE
     chown system system /keydata
     chmod 0771 /keydata
@@ -800,7 +788,7 @@ on zygote-start && property:ro.crypto.state=encrypted && property:ro.crypto.type
     start zygote_secondary
 
 on boot
-    
+
     # basic network init
     ifup lo
     hostname localhost

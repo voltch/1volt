@@ -87,5 +87,6 @@ mv "${ZIP_NAME}".zip /home/volt/Downloads/"${ZIP_NAME}".zip
 rm -rf deluxe/kernel.tar.xz
 cd ../../
 rm -rf deluxe/*.img
+rm -rf arch/arm64/boot/dtb_greatlte.img
 clear
 echo -e " BUILT ${ZIP_NAME}.zip. ${NONE}"

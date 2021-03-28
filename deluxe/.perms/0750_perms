@@ -14,5 +14,3 @@ ramdisk/init
 ramdisk/init.samsungexynos8895.usb.rc
 ramdisk/sbin/charger
 ramdisk/sbin/sswap
-ramdisk/sbin/knox_changer
-ramdisk/sbin/dm_verity_signature_checker
