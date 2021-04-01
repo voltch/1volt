@@ -270,24 +270,24 @@ on boot
     # int dvfs node
     chown radio system /sys/class/devfreq/17000020.devfreq_int/available_frequencies
     chmod 0664 /sys/class/devfreq/17000020.devfreq_int/available_frequencies
-    chown root root /sys/class/devfreq/17000020.devfreq_int/min_freq
-    chmod 0000 /sys/class/devfreq/17000020.devfreq_int/min_freq
+    chown radio system /sys/class/devfreq/17000020.devfreq_int/min_freq
+    chmod 0664 /sys/class/devfreq/17000020.devfreq_int/min_freq
     chown root root /sys/class/devfreq/17000020.devfreq_int/max_freq
     chmod 0000 /sys/class/devfreq/17000020.devfreq_int/max_freq
 
     # disp dvfs node
     chown radio system /sys/class/devfreq/17000040.devfreq_disp/available_frequencies
     chmod 0664 /sys/class/devfreq/17000040.devfreq_disp/available_frequencies
-    chown root root /sys/class/devfreq/17000040.devfreq_disp/min_freq
-    chmod 0000 /sys/class/devfreq/17000040.devfreq_disp/min_freq
+    chown radio system /sys/class/devfreq/17000040.devfreq_disp/min_freq
+    chmod 0664 /sys/class/devfreq/17000040.devfreq_disp/min_freq
     chown root root /sys/class/devfreq/17000040.devfreq_disp/max_freq
     chmod 0000 /sys/class/devfreq/17000040.devfreq_disp/max_freq
 
     # cam dvfs node
     chown radio system /sys/class/devfreq/17000050.devfreq_cam/available_frequencies
     chmod 0664 /sys/class/devfreq/17000050.devfreq_cam/available_frequencies
-    chown root root /sys/class/devfreq/17000050.devfreq_cam/min_freq
-    chmod 0000 /sys/class/devfreq/17000050.devfreq_cam/min_freq
+    chown radio system /sys/class/devfreq/17000050.devfreq_cam/min_freq
+    chmod 0664 /sys/class/devfreq/17000050.devfreq_cam/min_freq
     chown root root /sys/class/devfreq/17000050.devfreq_cam/max_freq
     chmod 0000 /sys/class/devfreq/17000050.devfreq_cam/max_freq
 

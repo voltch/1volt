@@ -31,8 +31,9 @@ on init
     chown system system /dev/stune/schedtune.prefer_perf
     chown system system /dev/stune/cgroup.procs
 
-    write /dev/stune/top-app/schedtune.boost 20
-    write /dev/stune/top-app/schedtune.prefer_idle 1
+    write /dev/stune/top-app/schedtune.band 1
+    write /dev/stune/top-app/schedtune.boost 1
+    write /dev/stune/top-app/schedtune.prefer_idle 0
     write /dev/stune/top-app/schedtune.prefer_perf 0
     write /dev/stune/top-app/schedtune.util_est_en 1
     write /dev/stune/top-app/schedtune.ontime_en 1
@@ -41,7 +42,7 @@ on init
     write /dev/stune/foreground/schedtune.prefer_idle 0
     write /dev/stune/foreground/schedtune.prefer_perf 0
     write /dev/stune/foreground/schedtune.util_est_en 1
-    write /dev/stune/foreground/schedtune.ontime_en 1
+    write /dev/stune/foreground/schedtune.ontime_en 0
 
     write /dev/stune/background/schedtune.boost 0
     write /dev/stune/background/schedtune.prefer_idle 0
@@ -178,7 +179,6 @@ on property:sys.boot_completed=1
     symlink /sys/kernel/config/usb_gadget/g1/functions/mass_storage.0 /sys/kernel/config/usb_gadget/g1/configs/c.1/mass_storage.0
     stop proca
     stop secure_storage
-    write /sys/fs/selinux/enforce 1
    # Run
    exec u:r:magisk:s0 root root -- /volt/volt.sh
    write /sys/devices/virtual/timed_output/vibrator/enable 100
