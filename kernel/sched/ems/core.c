@@ -46,6 +46,7 @@ static int select_proper_cpu(struct task_struct *p, int prev_cpu)
 	unsigned long best_active_util = ULONG_MAX;
 	unsigned long best_idle_util = ULONG_MAX;
 	int best_idle_cstate = INT_MAX;
+	int best_active_cpu = -1;
 	int best_idle_cpu = -1;
 	int best_cpu = -1;
 
@@ -104,15 +105,18 @@ static int select_proper_cpu(struct task_struct *p, int prev_cpu)
 				continue;
 
 			best_active_util = new_util;
-			best_cpu = i;
+			best_active_cpu = i;
 		}
 
 		/*
 		 * if it fails to find the best cpu in this coregroup, visit next
 		 * coregroup.
 		 */
-		if (cpu_selected(best_cpu) && is_cpu_preemptible(p, -1, best_cpu, 0))
+		if (cpu_selected(best_active_cpu) &&
+		    is_cpu_preemptible(p, -1, best_active_cpu, 0)) {
+			best_cpu = best_active_cpu;
 			break;
+		}
 	}
 
 	if (!cpu_selected(best_cpu)) {
