@@ -184,14 +184,14 @@
 		battery,chg_gpio_full_check = <0>;
 		battery,chg_polarity_full_check = <1>;
 
-		battery,chg_high_temp = <810>;
-		battery,chg_high_temp_recovery = <800>;
+		battery,chg_high_temp = <490>;
+		battery,chg_high_temp_recovery = <470>;
 		battery,chg_input_limit_current = <1000>;
 		battery,chg_charging_limit_current = <1500>;
 
 		battery,wpc_temp_control_source = <1>; /* TEMP_CONTROL_SOURCE_BAT_THM = WPC_THM */
-		battery,wpc_high_temp = <410>;
-		battery,wpc_high_temp_recovery = <400>;
+		battery,wpc_high_temp = <380>;
+		battery,wpc_high_temp_recovery = <360>;
 		battery,wpc_charging_limit_current = <600>;
 		battery,wpc_lcd_on_high_temp = <460>;
 		battery,wpc_lcd_on_high_temp_rec = <300>;
@@ -210,8 +210,8 @@
 		battery,wc_cv_pack_current = <630>;
 
 		battery,mix_high_temp = <420>;
-		battery,mix_high_chg_temp = <810>;
-		battery,mix_high_temp_recovery = <450>;
+		battery,mix_high_chg_temp = <500>;
+		battery,mix_high_temp_recovery = <390>;
 
 		/* SEC_BATTERY_FULL_CONDITION_NOTIMEFULL |
 		   SEC_BATTERY_FULL_CONDITION_VCELL */
