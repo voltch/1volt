@@ -235,36 +235,10 @@ static bool sugov_up_down_rate_limit(struct sugov_policy *sg_policy, u64 time,
 	return false;
 }
 
-static int sugov_select_scaling_cpu(void)
-{
-	int cpu, candidate = -1;
-	unsigned long rt, util, min = INT_MAX;
-	cpumask_t mask;
-
-	cpumask_clear(&mask);
-	cpumask_and(&mask, cpu_coregroup_mask(0), cpu_active_mask);
-
-	/* Idle core of the boot cluster is selected to scaling cpu */
-	for_each_cpu(cpu, &mask) {
-		rt = cpu_rq(cpu)->rt.avg.util_avg;
-#ifdef CONFIG_SCHED_EMS
-		util = ml_boosted_cpu_util(cpu) + rt;
-#else
-		util = boosted_cpu_util(cpu, rt);
-#endif
-		if (util < min) {
-			min = util;
-			candidate = cpu;
-		}
-	}
-	return candidate;
-}
-
 static void sugov_update_commit(struct sugov_policy *sg_policy, u64 time,
 				unsigned int next_freq)
 {
 	struct cpufreq_policy *policy = sg_policy->policy;
-	int cpu;
 
 	if (sugov_up_down_rate_limit(sg_policy, time, next_freq)) {
 		/* Reset cached freq as next_freq isn't changed */
@@ -286,12 +260,8 @@ static void sugov_update_commit(struct sugov_policy *sg_policy, u64 time,
 		policy->cur = next_freq;
 		trace_cpu_frequency(next_freq, smp_processor_id());
 	} else if (!sg_policy->work_in_progress) {
-		cpu = sugov_select_scaling_cpu();
-		if (cpu < 0)
-			return;
-
 		sg_policy->work_in_progress = true;
-		irq_work_queue_on(&sg_policy->irq_work, cpu);
+		irq_work_queue(&sg_policy->irq_work);
 	}
 }
 
