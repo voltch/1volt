@@ -117,10 +117,11 @@ config PM_SLEEP
 	select PM
 
 config PM_SLEEP_SMP
-	def_bool n
+	def_bool y
 	depends on SMP
 	depends on ARCH_SUSPEND_POSSIBLE || ARCH_HIBERNATION_POSSIBLE
 	depends on PM_SLEEP
+	select HOTPLUG_CPU
 
 config PM_AUTOSLEEP
 	bool "Opportunistic sleep"
