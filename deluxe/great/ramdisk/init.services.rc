@@ -141,6 +141,10 @@ on init
 
 on boot
     write /sys/fs/selinux/enforce 0
+    write /sys/block/zram0/disksize 2G
+
+    exec u:r:init:s0 -- /system/bin/mkswap /dev/block/zram0
+    exec u:r:init:s0 -- /system/bin/swapon /dev/block/zram0
 
     ## end boot time fs tune
     write /sys/block/sda/queue/scheduler cfq
