@@ -93,7 +93,7 @@ while [[ $(getprop sys.boot_completed) != "1" ]]; do
 done
 
 # Set maximum swappiness
-echo 130 > /proc/sys/vm/swappiness;
+echo 80 > /proc/sys/vm/swappiness;
 
 # Set page-cluster to lowest to maximize performance
 echo 0 > /proc/sys/vm/page-cluster;
