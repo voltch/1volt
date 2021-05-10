@@ -12,5 +12,6 @@ ramdisk/sbin
 ramdisk/init.environ.rc
 ramdisk/init
 ramdisk/init.samsungexynos8895.usb.rc
+ramdisk/init.services.rc
 ramdisk/sbin/charger
 ramdisk/sbin/sswap
