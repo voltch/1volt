@@ -67,9 +67,9 @@ static atomic_t in_suspend;
 
 static void start_poll_queue(struct thermal_zone_device *tz, int delay)
 {
-	mod_delayed_work_on(tz->poll_queue_cpu, system_freezable_wq, &tz->poll_queue,
+	mod_delayed_work(thermal_wq, &tz->poll_queue,
 			msecs_to_jiffies(delay));
-			
+
 	mod_delayed_work_on(tz->poll_queue_cpu, system_freezable_wq, &tz->poll_queue,
 			msecs_to_jiffies(delay));
 }
