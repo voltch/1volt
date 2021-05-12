@@ -39,7 +39,6 @@
 #include <net/netlink.h>
 #include <net/genetlink.h>
 #include <linux/suspend.h>
-#include <linux/cpu.h>
 
 #define CREATE_TRACE_POINTS
 #include <trace/events/thermal.h>
@@ -64,6 +63,7 @@ static DEFINE_MUTEX(thermal_governor_lock);
 
 static atomic_t in_suspend;
 
+static struct workqueue_struct *thermal_wq;
 
 static void start_poll_queue(struct thermal_zone_device *tz, int delay)
 {
@@ -2361,6 +2361,17 @@ static int __init thermal_init(void)
 {
 	int result;
 
+	struct workqueue_attrs attr;
+
+	attr.nice = 0;
+	attr.no_numa = true;
+	cpumask_copy(attr.cpumask, cpu_coregroup_mask(0));
+
+	thermal_wq = alloc_workqueue("%s", WQ_UNBOUND |\
+			WQ_MEM_RECLAIM | WQ_FREEZABLE,
+			0, "thermal_check");
+	apply_workqueue_attrs(thermal_wq, &attr);
+
 	result = thermal_register_governors();
 	if (result)
 		goto error;
@@ -2377,7 +2388,6 @@ static int __init thermal_init(void)
 	if (result)
 		goto exit_netlink;
 
-	register_hotcpu_notifier(&thermal_cpu_notifier);
 	result = register_pm_notifier(&thermal_pm_nb);
 	if (result)
 		pr_warn("Thermal: Can not register suspend notifier, return %d\n",
