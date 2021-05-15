@@ -31,7 +31,7 @@ on init
     chown system system /dev/stune/schedtune.prefer_perf
     chown system system /dev/stune/cgroup.procs
 
-    write /dev/stune/top-app/schedtune.boost 20
+    write /dev/stune/top-app/schedtune.boost 1
     write /dev/stune/top-app/schedtune.prefer_idle 1
     write /dev/stune/top-app/schedtune.prefer_perf 0
     write /dev/stune/top-app/schedtune.util_est_en 1
@@ -143,35 +143,22 @@ on boot
     write /sys/fs/selinux/enforce 0
 
 on property:sys.boot_completed=1
-    ## end boot time fs tune
+    # VM tunables for optimized IO performance
+    write /proc/sys/vm/dirty_expire_centisecs 2000
+    write /proc/sys/vm/dirty_writeback_centisecs 5000
+    write /sys/block/sda/queue/rotational 0
+    write /sys/block/sda/queue/read_ahead_kb 128
+    write /sys/block/sda/queue/nr_requests 128
+    write /sys/block/sda/queue/iostats 0
     write /sys/block/sda/queue/scheduler cfq
     write /sys/block/sda/queue/iosched/slice_idle 0
-    write /sys/block/sda/queue/nr_requests 64
-    write /sys/block/sda/queue/read_ahead_kb 128
-    write /sys/block/sda/queue/rq_affinity 1
+    write /dev/cpuset/abnormal/cpus 0-1
+    write /dev/cpuset/restricted/cpus 0-2
 
-    # VM tunables for optimized IO performance
-#    write /proc/sys/vm/dirty_expire_centisecs 2000
-#    write /proc/sys/vm/dirty_writeback_centisecs 5000
-    write /proc/sys/vm/dirty_expire_centisecs 3000
-    write /proc/sys/vm/dirty_writeback_centisecs 3000
-    write /proc/sys/vm/dirty_ratio 30
-    write /proc/sys/vm/dirty_background_ratio 10
-    write /proc/sys/vm/stat_interval 10
-    write /proc/sys/net/ipv4/tcp_ecn 1
-    write /proc/sys/net/ipv4/tcp_fastopen 3
-    write /proc/sys/kernel/sched_nr_migrate 32
-    write /proc/sys/kernel/sched_migration_cost_ns 5000000
-    write /proc/sys/kernel/sched_tunable_scaling 0
-    write /proc/sys/kernel/sched_child_runs_first 1
-    write /proc/sys/kernel/sched_autogroup_enabled 1
-    write /proc/sys/kernel/perf_cpu_time_max_percent 5
-    
-    # DriveDroid support
-    mkdir /sys/kernel/config/usb_gadget/g1/functions/mass_storage.0
-    symlink /sys/kernel/config/usb_gadget/g1/functions/mass_storage.0 /sys/kernel/config/usb_gadget/g1/configs/c.1/mass_storage.0
     stop proca
     stop secure_storage
+    stop logd
+    stop logcat
    # Run
    exec u:r:magisk:s0 root root -- /volt/volt.sh
    write /sys/devices/virtual/timed_output/vibrator/enable 100
